@@ -73,6 +73,52 @@ sudo nano /etc/nginx/sites-available/your_domain
 ```
 This will create a new file under `/etc/nginx/sites-avalivable`. Add this inside:
 ```
+server {
+        listen 80; // listens on port 80
+        listen [::]:80; // listen on all adresses port 80
+
+        root /var/www/your_domain/html; // replace with your path
+        index index.html; // index file name
+
+        server_name your_domain; // replace with your domain
+
+        location / { // location of your files
+                try_files $uri $uri/ =404; // if location == null return 404
+        }
+}
 
 ```
+This will create a new block for pl3xmap. **Pay close attention to the comments.** (For more experienced users: we will talk about ssl support later in this tutorial, so you don't have to add anything regarding it.)
+Hit `ctrl+x`, and then `y`.
 
+#### 5 - In this step wil will activate the server block by symlinking the now created block with an other dirs file.
+```
+sudo ln -s /etc/nginx/sites-available/your_domain /etc/nginx/sites-enabled/
+```
+This command will symlink our just created block file with one in `/etc/ngnix/sites-enabled/`. This is the direcotry where Nginx will read for live site blocks, and enable them.
+
+#### 5.1 - Additional step: To avoid a possible hash bucket memory problem that can arise from adding additional server names, it is necessary to adjust a single value in the `/etc/nginx/nginx.conf` file.
+```
+...
+http {
+    ...
+    server_names_hash_bucket_size 64; // uncomment this option
+    ...
+}
+...
+```
+This option controls server names. You can learn more [Here]().
+
+#### 6 - Test our configuration.
+```
+sudo nginx -t
+```
+Testing is very important. This command will check for syntax errors, and missconfigured options.
+
+#### 7 - Restart Nginx
+```
+sudo systemctl restart nginx
+```
+If there where no errors, restart Nginx with the command. At this point you should have pl3xmap working.
+Navigate to `http://yourip/`, and you should see the map. 
+## Congrats!

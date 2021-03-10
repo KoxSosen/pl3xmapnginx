@@ -1,38 +1,3 @@
-## Internal Server
-
-Pl3xMap ships with a very basic internal web server to help host your map files. It has all the bells and whistles you'll need to get your map online and sharable.
-
-```yaml
-  # the internal web server settings
-  internal-webserver:
-
-    # set to true to use the internal web server.
-    # set to false if you want to run your own
-    # external web server
-    enabled: true
-
-    # the ip the internal web server will bind to
-    # (leave this alone if you don't know what it does)
-    bind: 0.0.0.0
-
-    # the port the internal web server will bind to
-    port: 8080
-```
-
-By default, the internal web server is enabled for your convenience. If you need a more advanced setup (like ssl certs) you will want to use an external server instead.
-
-The default address to bind to is `0.0.0.0` which simply means "any address the machine gets." Most people will want to leave this setting alone. It is only used if you have multiple network cards installed on the machine and need to bind to a specific one. If you dont understand what that means, then this option isn't for you and you should leave it alone.
-
-The default port is 8080. You will want to ensure this port is open to outside internet connections so others can access the map. If you have access to port 80 and no other services are using it, you can set it to port 80 which will allow users to use the map without specifying a port in the address bar.
-
-## External Server
-
-There are 2 main options people use these days for web servers. Apache2, and Nginx.
-
-### Apache
-
-_todo_
-
 # Nginx
 
 
@@ -133,6 +98,10 @@ Navigate to `http://yourip/`, and you should see the map.
 #### 8 - Add a DNS record to your domain.
 
 Navigate to your registar, and add an `A` record pointing at your ipv4 adress. I recommend using [Cloudflare]().
+***
+#### 8.1 This step is additional if you would not like to use nginxes certbot plugin.
+
+In step 9, we will use certbots built in nginx plugin, to install and gain an ssl certificate for our website. If you would like to to do that, skip this step, and go to step 9. If you would like to do it manually, please refer to [this guide](https://github.com/mikroskeem/nginx-config/blob/master/doc/certbot.md).
 ***
 #### 9 - Add ssl for an encrypted connection & security.
 ```

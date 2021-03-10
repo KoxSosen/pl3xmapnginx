@@ -1,4 +1,4 @@
-# Nginx
+# Nginx tutorial for [Pl3xMap](https://github.com/pl3xgaming/Pl3xMap/)
 
 
 This tutorial assumes that you have

@@ -7,7 +7,7 @@ This tutorial assumes that you have
 - you run a linux distro with apt-get.
 - you have port `80`, and port `443` open at TCP.
 - you allready ran pl3xmap once with the internal webserver enabled.  
-- #### you have Ngix installed. No additional changes required, the default config is great. 
+- #### you have ***the latest stable relase of*** Ngix installed. No additional changes required, the default config is great. 
 
 #### Here is a great tutorial: [Click here](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04). Follow till Step 4, and come back here.
 

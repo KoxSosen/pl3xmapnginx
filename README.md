@@ -18,7 +18,7 @@ This tutorial assumes that you have
 ```
 sudo mkdir -p /var/www/your_domain/html
 ```
-Replace `you_domain` with the domain you wish to use. This can be the name of your subdomain too.
+Replace `your_domain` with the domain you wish to use. This can be the name of your subdomain too.
 ***
 #### 2 - Next, we will have to assing the correct permission to the server block, to allow your user to read/whrite. 
 ```
@@ -28,7 +28,17 @@ sudo chmod -R 755 /var/www/your_domain
 The fist command will assign ownership to your user.
 The second command will allow the owner to read, write, and execute, while only allow read and execute perms to groups and others
 ***
-#### 3 - In the next step we will move the files from the defult pl3xmap web dir (`~/plugins/Pl3xMap/web`) to Ngnixes web root. (`/var/www/your_domain/html`)
+### 2.1 - Addotional step: Instead of giving pl3xmap whrite & read access, you can add your user to the www-data group.
+```
+sudo usermod -a -G www-data youruser
+```
+### 2.2 - An other additional step. In the next step we will copy the files from pl3xmaps webdir to Nginxes webroot. It's fine if you want to do  that, however it can be sloved with a simple symlink too. 
+```
+sudo ln -s ~/plugins/Pl3xMap/web /var/www/your_domain/html
+```
+Please note that after executing this step, your Nginx server block configuration will require addtional options since it's a symlink. If you wouldn't like to deal with this you can skip this step, and move to the 3rd one.
+***
+#### 3 - In the next step we will move the files from the defult pl3xmap web dir (`~/plugins/Pl3xMap/web`) to Ngixes web root. (`/var/www/your_domain/html`)
 ```
 sudo cp /path/to/your/server/plugins/Pl3xMap/web /var/www/your_domain/html 
 ```
@@ -112,3 +122,4 @@ sudo cerbot --nginx
 The folowing steps are very straight foward. Choose your server block, and your prefererd option. Wait for it to finish.
 ***
 ### Now navigate to https://map.yourdomain.test . Congrats!!
+
